@@ -22,8 +22,14 @@ public class Runner {
 		acc1.setLastName("Bamford");
 		acc1.setAccountNumber(143);
 		
+		Account acc2=new Account();
+		acc2.setFirstName("Mot");
+		acc2.setLastName("Bad");
+		acc2.setAccountNumber(463);
+		
 		Service.addAccount(acc1,accountList);
-		System.out.println(Service.retrieveAccount(acc1,accountList));
+		Service.addAccount(acc2,accountList);
+		//System.out.println(Service.retrieveAccount(acc1,accountList));
 		
 		
 		//String ans=mapper.writeValueAsString(acc1);
@@ -31,8 +37,11 @@ public class Runner {
 		try {
 
 			// Convert object to JSON string
-			String jsonInString = mapper.writeValueAsString(acc1);
+			for(Account value : accountList.values()) {
+			String jsonInString = mapper.writeValueAsString(Service.retrieveAccount(value,accountList));
 			System.out.println(jsonInString);
+			}
+			
 
 
 		} catch (JsonGenerationException e) {
