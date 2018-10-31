@@ -4,14 +4,22 @@ import java.util.HashMap;
 
 public class Service {
 	
-	public static void addAccount(Account acc, HashMap<Integer,Account> list) {
+	static HashMap<Integer, Account> accountList = new HashMap<Integer, Account>();
+	
+	public static void addAccount(Account acc) {
 		
-		list.put(acc.getAccountNumber(),acc);
+		accountList.put(acc.getAccountNumber(),acc);
 		
 	}
 	
-	public static Account retrieveAccount(Account acc, HashMap<Integer,Account> list) {
-		return list.get(acc.getAccountNumber());
+	public static Account retrieveAccount(Account acc) {
+		return accountList.get(acc.getAccountNumber());
 	}
+	
+	public static int firstNameNumberMethod(String string) {
+	    
+		return (int) accountList.values().stream().filter(i->i.getFirstName().equals(string)).count();
+	}
+	
 
 }
