@@ -1,10 +1,22 @@
 package com.qa.AccountProject;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.validation.constraints.Size;
+
+@Entity
 public class Account {
 	
-	private String firstName;
-	private String lastName;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Id
 	private int accountNumber;
+	@Column(length=100)
+	private String firstName;
+	@Column(length=100)
+	private String lastName;
 	
 	
 	public String getFirstName() {
