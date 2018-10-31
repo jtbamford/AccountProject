@@ -18,20 +18,7 @@ public class Service {
 	
 	public static int firstNameNumberMethod(String string) {
 	    
-		int count=0;
-		Account acc = new Account();
-		
-		for (Account value : accountList.values()) {
-			
-			acc=Service.retrieveAccount(value);
-			
-			if(acc.getFirstName().equals(string)) {
-				count++;
-			}
-			
-		}
-		
-		return count;
+		return (int) accountList.values().stream().filter(i->i.getFirstName().equals(string)).count();
 	}
 	
 
