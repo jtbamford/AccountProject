@@ -10,6 +10,6 @@ public interface Accountable {
 	
 	public String updateAccount(Account account, int accountNumber);
 	
-	public String retrieveAccount(int accountNumber);
+	public Account retrieveAccount(int accountNumber);
 
 }

@@ -21,7 +21,7 @@ import com.qa.AccountProject.JSONUtil;
 
 @Transactional(SUPPORTS)
 @Default
-public class DatabaseImpl {
+public class DatabaseImpl implements Accountable {
 	
 	//static HashMap<Integer, Account> accountList = new HashMap<Integer, Account>();
 	
@@ -31,12 +31,14 @@ public class DatabaseImpl {
 	@Inject
 	private JSONUtil util;
 	
+	@Override
 	public String getAllAccounts() {
 		Query query = manager.createQuery("Select a FROM Account a");
 		HashMap<Integer, Account> accountList1 = (HashMap<Integer, Account>) query.getResultList();
 		return util.getJSONForObject(accountList1);
 	}
 	
+	@Override
 	@Transactional(REQUIRED)
 	public String addAccount(Account acc) {
 		manager.persist(acc);
@@ -49,6 +51,7 @@ public class DatabaseImpl {
 		
 	//}
 	
+	@Override
 	@Transactional(REQUIRED)
 	public String deleteAccount(int accountNumber) {
 		Account accountInDB = retrieveAccount(accountNumber);
@@ -58,10 +61,12 @@ public class DatabaseImpl {
 		return "{\"message\": \"account sucessfully deleted\"}";
 	}
 	
-	private Account retrieveAccount(int accountNumber) {
+	@Override
+	public Account retrieveAccount(int accountNumber) {
 		return manager.find(Account.class, accountNumber);
 	}
 	
+	@Override
 	@Transactional(REQUIRED)
 	public String updateAccount(Account account, int accountNumber) {
 		Account accountold=retrieveAccount(accountNumber);
