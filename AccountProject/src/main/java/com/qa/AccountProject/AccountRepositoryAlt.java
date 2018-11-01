@@ -25,23 +25,25 @@ import com.qa.AccountProject.JSONUtil;
 
 @ApplicationScoped
 @Alternative
-public class AccountRepositoryAlt {
+public class AccountRepositoryAlt implements Accountable {
 
 	static HashMap<Integer, Account> accountListAlt = new HashMap<Integer, Account>();
 	
 	@Inject
 	private JSONUtil util;
 	
-	public List<Account> getAllAccounts() {
-		    return (List<Account>) accountListAlt.values();
+	@Override
+	public String getAllAccounts() {
+		    return (String) accountListAlt.toString();
 	}
 	
+	@Override
 	public String addAccount(Account acc) {
 		accountListAlt.put(acc.getAccountNumber(),acc);
 		return "Account Added";
 	}
 	
-	
+	@Override
 	public String deleteAccount(int accountNumber) {
 		Account accountInDB = retrieveAccount(accountNumber);
 		if (accountInDB != null) {
@@ -50,10 +52,12 @@ public class AccountRepositoryAlt {
 		return "{\"message\": \"account sucessfully deleted\"}";
 	}
 	
-	private Account retrieveAccount(int accountNumber) {
+	@Override
+	public Account retrieveAccount(int accountNumber) {
 		return accountListAlt.get(accountNumber);
 	}
 	
+	@Override
 	public String updateAccount(Account account, int accountNumber) {
 		Account accountold=retrieveAccount(accountNumber);
 		accountold.setFirstName(account.getFirstName());

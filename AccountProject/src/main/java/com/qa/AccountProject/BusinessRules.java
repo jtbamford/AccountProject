@@ -27,7 +27,7 @@ public class BusinessRules implements Accountable {
 	}
 	
 	@Override
-	public String retrieveAccount(int accountNumber) {
+	public Account retrieveAccount(int accountNumber) {
 		return repo.retrieveAccount(accountNumber);
 	}
 	
