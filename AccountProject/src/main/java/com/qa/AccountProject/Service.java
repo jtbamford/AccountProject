@@ -24,7 +24,5 @@ public class Service {
 		    
 			return (int) accountList.values().stream().filter(i->i.getFirstName().equals(string)).count();
 		}
-		
-
 	}
 	
